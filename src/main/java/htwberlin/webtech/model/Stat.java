@@ -10,7 +10,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Stat {
-     private Integer questionId;
+     private Integer id;
      private Integer rating;
      private Integer anzahl;
 }

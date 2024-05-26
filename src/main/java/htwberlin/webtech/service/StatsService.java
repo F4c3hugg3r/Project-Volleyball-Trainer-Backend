@@ -10,17 +10,17 @@ import java.util.*;
 public class StatsService {
 
     @Getter
-    private static final Set<Stat> stats = new HashSet<>();
+    private static List<Stat> stats = new ArrayList<>();
 
     public static void updateStats(Integer id, Integer rating, Integer anzahl) {
         stats.stream()
-                .filter(stat -> Objects.equals(stat.getQuestionId(), id) && Objects.equals(stat.getRating(), rating))
+                .filter(stat -> Objects.equals(stat.getId(), id) && Objects.equals(stat.getRating(), rating))
                 .forEach(stat -> stat.setAnzahl(stat.getAnzahl() + anzahl));
     }
 
     public static boolean checkExistence(Integer id, Integer rating) {
         return stats.stream()
-                .anyMatch(stat -> Objects.equals(stat.getQuestionId(), id) && Objects.equals(stat.getRating(), rating));
+                .anyMatch(stat -> Objects.equals(stat.getId(), id) && Objects.equals(stat.getRating(), rating));
     }
 
     public static void addStat(final Stat stat) {
@@ -28,6 +28,6 @@ public class StatsService {
     }
 
     public static void removeStat(Integer id, Integer rating) {
-        stats.removeIf(stat -> stat.getQuestionId().equals(id) && stat.getRating().equals(rating));
+        stats.removeIf(stat -> stat.getId().equals(id) && stat.getRating().equals(rating));
     }
 }

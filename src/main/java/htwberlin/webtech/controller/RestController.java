@@ -15,17 +15,22 @@ import java.util.Set;
 
 @Controller
 @AllArgsConstructor
-@RequestMapping("/quiz")
+@RequestMapping("/stats")
 public class RestController {
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Set<Stat>> getStat() {
+    public ResponseEntity<List<Stat>> getStats() {
         return ResponseEntity.ok(StatsService.getStats());
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Stat> addStat(@Valid @RequestBody Stat body) {
-        StatsService.addStat(body);
+    public ResponseEntity<Stat> updateStat(@Valid @RequestBody Stat body) {
+        if(!StatsService.checkExistence(body.getId(), body.getRating())) {
+            StatsService.addStat(body);
+        }
+        else {
+            StatsService.updateStats(body.getId(), body.getRating(), body.getAnzahl());
+        }
         return new ResponseEntity<>(body, HttpStatus.CREATED);
     }
 
