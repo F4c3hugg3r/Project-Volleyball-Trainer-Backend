@@ -17,5 +17,6 @@ public class WebConfig implements WebMvcConfigurer {
                 .allowedOrigins("http://localhost:5174",
                         "http://localhost:5173",
                         "https://volleyball-trainer-frontend.onrender.com");
+
     }
 }
