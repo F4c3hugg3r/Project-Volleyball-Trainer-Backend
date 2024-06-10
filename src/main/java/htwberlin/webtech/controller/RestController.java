@@ -1,6 +1,7 @@
 package htwberlin.webtech.controller;
 
 import htwberlin.webtech.model.Stat;
+import htwberlin.webtech.persistence.StatRepository;
 import htwberlin.webtech.service.StatsService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
@@ -18,19 +19,21 @@ import java.util.Set;
 @RequestMapping("/stats")
 public class RestController {
 
+    private final StatsService service;
+
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<Stat>> getStats() {
-        return ResponseEntity.ok(StatsService.getStats());
+    public ResponseEntity<Iterable<Stat>> getStats() {
+        return ResponseEntity.ok(service.getStats());
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Stat> updateStat(@Valid @RequestBody Stat body) {
-        if(!StatsService.checkExistence(body.getId(), body.getRating())) {
-            StatsService.addStat(body);
-        }
-        else {
-            StatsService.updateStats(body.getId(), body.getRating(), body.getAnzahl());
-        }
+//        if(!StatsService.checkExistence(body.getId(), body.getRating())) {
+//            StatsService.addStat(body);
+//        }
+//        else {
+            service.saveStats(body.getId(), body.getRating(), body.getAnzahl());
+//        }
         return new ResponseEntity<>(body, HttpStatus.CREATED);
     }
 

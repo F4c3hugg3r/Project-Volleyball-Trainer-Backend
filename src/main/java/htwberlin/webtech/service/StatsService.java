@@ -1,7 +1,9 @@
 package htwberlin.webtech.service;
 
 import htwberlin.webtech.model.Stat;
+import htwberlin.webtech.persistence.StatRepository;
 import lombok.Getter;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -9,25 +11,28 @@ import java.util.*;
 @Service
 public class StatsService {
 
-    @Getter
-    private static List<Stat> stats = new ArrayList<>();
+    @Autowired
+    private StatRepository repo;
 
-    public static void updateStats(Integer id, Integer rating, Integer anzahl) {
-        stats.stream()
-                .filter(stat -> Objects.equals(stat.getId(), id) && Objects.equals(stat.getRating(), rating))
-                .forEach(stat -> stat.setAnzahl(stat.getAnzahl() + anzahl));
+    public Stat saveStats(Long id, Integer rating, Integer anzahl) {
+//        stats.stream()
+//                .filter(stat -> Objects.equals(stat.getId(), id) && Objects.equals(stat.getRating(), rating))
+//                .forEach(stat -> stat.setAnzahl(stat.getAnzahl() + anzahl));
+        return repo.save(new Stat(id,rating,anzahl));
     }
 
-    public static boolean checkExistence(Integer id, Integer rating) {
-        return stats.stream()
-                .anyMatch(stat -> Objects.equals(stat.getId(), id) && Objects.equals(stat.getRating(), rating));
+    public Iterable<Stat> getStats() {
+        return repo.findAll();
     }
 
-    public static void addStat(final Stat stat) {
-        stats.add(stat);
-    }
+//    public boolean checkExistence(Long id, Integer rating) {
+////        return stats.stream()
+////                .anyMatch(stat -> Objects.equals(stat.getId(), id) && Objects.equals(stat.getRating(), rating));
+//        return false;
+//    }
 
-    public static void removeStat(Integer id, Integer rating) {
-        stats.removeIf(stat -> stat.getId().equals(id) && stat.getRating().equals(rating));
+    public void removeStat(Long id) {
+//        stats.removeIf(stat -> stat.getId().equals(id) && stat.getRating().equals(rating));
+        repo.deleteById(id);
     }
 }
