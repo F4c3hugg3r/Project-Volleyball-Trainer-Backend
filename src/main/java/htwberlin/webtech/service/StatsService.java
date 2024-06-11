@@ -18,11 +18,11 @@ public class StatsService {
 //        stats.stream()
 //                .filter(stat -> Objects.equals(stat.getId(), id) && Objects.equals(stat.getRating(), rating))
 //                .forEach(stat -> stat.setAnzahl(stat.getAnzahl() + anzahl));
-        return repo.save(new Stat(id,rating,anzahl));
+        return this.repo.save(new Stat(id,rating,anzahl));
     }
 
     public Iterable<Stat> getStats() {
-        return repo.findAll();
+        return this.repo.findAll();
     }
 
 //    public boolean checkExistence(Long id, Integer rating) {
@@ -31,8 +31,10 @@ public class StatsService {
 //        return false;
 //    }
 
-    public void removeStat(Long id) {
+    public boolean removeStat(Long id) {
 //        stats.removeIf(stat -> stat.getId().equals(id) && stat.getRating().equals(rating));
-        repo.deleteById(id);
+        final boolean exists = repo.existsById(id);
+        if (exists) repo.deleteById(id);
+        return exists;
     }
 }
