@@ -1,6 +1,7 @@
 package htwberlin.webtech.service;
 
 import htwberlin.webtech.model.Stat;
+import htwberlin.webtech.model.StatId;
 import htwberlin.webtech.persistence.StatRepository;
 import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,11 +15,8 @@ public class StatsService {
     @Autowired
     private StatRepository repo;
 
-    public Stat saveStats(Long id, Integer rating, Integer anzahl) {
-//        stats.stream()
-//                .filter(stat -> Objects.equals(stat.getId(), id) && Objects.equals(stat.getRating(), rating))
-//                .forEach(stat -> stat.setAnzahl(stat.getAnzahl() + anzahl));
-        return this.repo.save(new Stat(id,rating,anzahl));
+    public Stat saveStats(StatId statId, Integer anzahl) {
+        return this.repo.save(new Stat(statId, anzahl));
     }
 
     public Iterable<Stat> getStats() {
@@ -31,10 +29,9 @@ public class StatsService {
 //        return false;
 //    }
 
-    public boolean removeStat(Long id) {
-//        stats.removeIf(stat -> stat.getId().equals(id) && stat.getRating().equals(rating));
-        final boolean exists = repo.existsById(id);
-        if (exists) repo.deleteById(id);
+    public boolean removeStat(StatId statId, Integer rating) {
+        final boolean exists = repo.existsById(statId);
+        if (exists) repo.deleteById(statId);
         return exists;
     }
 }

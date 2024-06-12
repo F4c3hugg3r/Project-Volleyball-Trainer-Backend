@@ -1,6 +1,7 @@
 package htwberlin.webtech.controller;
 
 import htwberlin.webtech.model.Stat;
+import htwberlin.webtech.model.StatId;
 import htwberlin.webtech.persistence.StatRepository;
 import htwberlin.webtech.service.StatsService;
 import jakarta.validation.Valid;
@@ -32,9 +33,10 @@ public class RestController {
 //            StatsService.addStat(body);
 //        }
 //        else {
-            service.saveStats(body.getId(), body.getRating(), body.getAnzahl());
+            StatId statId = new StatId(body.getId().getQuestionId(), body.getId().getRating());
+            service.saveStats(statId, body.getAnzahl());
 //        }
-        return new ResponseEntity<>(body, HttpStatus.CREATED);
+        return new ResponseEntity<>(new Stat(statId, body.getAnzahl()), HttpStatus.CREATED);
     }
 
 
