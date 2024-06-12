@@ -16,6 +16,6 @@ import java.io.Serializable;
 public class StatId implements Serializable {
 
 
-    private Long questionId;
+    private Long id;
     private Integer rating;
 }
