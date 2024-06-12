@@ -29,9 +29,10 @@ public class StatsService {
 //        return false;
 //    }
 
-    public boolean removeStat(StatId statId, Integer rating) {
-        final boolean exists = repo.existsById(statId);
-        if (exists) repo.deleteById(statId);
-        return exists;
+    public void removeAllStats() {
+//        final boolean exists = repo.existsById(statId);
+//        if (exists) repo.deleteById(statId);
+//        return exists;
+        repo.deleteAll();
     }
 }

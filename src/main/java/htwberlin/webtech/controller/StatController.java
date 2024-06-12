@@ -2,7 +2,6 @@ package htwberlin.webtech.controller;
 
 import htwberlin.webtech.model.Stat;
 import htwberlin.webtech.model.StatId;
-import htwberlin.webtech.persistence.StatRepository;
 import htwberlin.webtech.service.StatsService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
@@ -12,13 +11,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-import java.util.Set;
-
 @Controller
 @AllArgsConstructor
 @RequestMapping("/stats")
-public class RestController {
+public class StatController {
 
     private final StatsService service;
 
@@ -39,5 +35,9 @@ public class RestController {
         return new ResponseEntity<>(new Stat(statId, body.getAnzahl()), HttpStatus.CREATED);
     }
 
-
+    @DeleteMapping
+    public ResponseEntity<Void> deleteAllStats() {
+        service.removeAllStats();
+        return ResponseEntity.noContent().build();
+    }
 }
