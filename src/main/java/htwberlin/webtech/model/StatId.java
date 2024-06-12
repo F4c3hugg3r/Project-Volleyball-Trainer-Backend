@@ -15,6 +15,6 @@ import java.io.Serializable;
 @Embeddable
 public class StatId implements Serializable {
 
-    private Integer id;
-    private Integer rating;
+    private String id;
+    private String rating;
 }
