@@ -29,7 +29,7 @@ public class StatController {
 //            StatsService.addStat(body);
 //        }
 //        else {
-            StatId statId = new StatId(body.getId().getQuestionId(), body.getId().getRating());
+            StatId statId = new StatId(body.getId().getId(), body.getId().getRating());
             service.saveStats(statId, body.getAnzahl());
 //        }
         return new ResponseEntity<>(new Stat(statId, body.getAnzahl()), HttpStatus.CREATED);
