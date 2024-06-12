@@ -15,8 +15,8 @@ public class StatsService {
     @Autowired
     private StatRepository repo;
 
-    public Stat saveStats(StatId statId, Integer anzahl) {
-        return this.repo.save(new Stat(statId, anzahl));
+    public Stat saveStats(Stat stat) {
+        return this.repo.save(stat);
     }
 
     public Iterable<Stat> getStats() {

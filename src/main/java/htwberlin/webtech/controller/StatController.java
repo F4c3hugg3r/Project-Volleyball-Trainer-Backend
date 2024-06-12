@@ -29,10 +29,10 @@ public class StatController {
 //            StatsService.addStat(body);
 //        }
 //        else {
-            StatId statId = new StatId(body.getId().getId(), body.getId().getRating());
-            service.saveStats(statId, body.getAnzahl());
+        Stat stat = new Stat(body.getId(), body.getAnzahl());
+            service.saveStats(stat);
 //        }
-        return new ResponseEntity<>(new Stat(statId, body.getAnzahl()), HttpStatus.CREATED);
+        return new ResponseEntity<>(stat, HttpStatus.CREATED);
     }
 
     @DeleteMapping
