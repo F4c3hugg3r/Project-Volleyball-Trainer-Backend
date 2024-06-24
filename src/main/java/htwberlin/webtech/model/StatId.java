@@ -18,8 +18,8 @@ import java.util.Objects;
 @Embeddable
 public class StatId implements Serializable {
 
-    protected String id;
-    protected String rating;
+    protected Integer id;
+    protected Integer rating;
 
     @Override
     public boolean equals(Object o) {
