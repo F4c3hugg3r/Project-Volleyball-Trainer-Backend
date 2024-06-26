@@ -10,5 +10,4 @@ public interface StatRepository extends CrudRepository<Stat, StatId> {
 
     Iterable<Stat> findById_Id(Integer id);
     Iterable<Stat> findById_Rating(Integer rating);
-
 }

@@ -1,7 +1,6 @@
 package htwberlin.webtech.controller;
 
 import htwberlin.webtech.model.Stat;
-import htwberlin.webtech.model.StatId;
 import htwberlin.webtech.service.StatsService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
@@ -24,16 +23,26 @@ public class StatController {
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Stat> updateStat(@Valid @RequestBody Stat body) {
-//        if(!StatsService.checkExistence(body.getId(), body.getRating())) {
-//            StatsService.addStat(body);
-//        }
-//        else {
+    public ResponseEntity<Stat> createStat(@Valid @RequestBody Stat body) {
         Stat stat = new Stat(body.getId(), body.getAnzahl());
             service.saveStats(stat);
-//        }
         return new ResponseEntity<>(stat, HttpStatus.CREATED);
     }
+
+    @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Stat> updateStat(@Valid @RequestBody Stat body) {
+        Stat stat = new Stat(body.getId(), body.getAnzahl());
+        final Stat updatedStat = service.updateStats(stat);
+        if (updatedStat == null) return ResponseEntity.notFound().build();
+        else return ResponseEntity.ok(updatedStat);
+    }
+
+    @DeleteMapping(path = "/{position}")
+    public ResponseEntity<Void> deleteStatsByPosition(@PathVariable("position") final Integer position) {
+        return service.deleteStatsByPosition(position) ? ResponseEntity.noContent().build() : ResponseEntity.notFound().build();
+    }
+
+    //TODO evtl Eigenen Stat erstellen
 
     @DeleteMapping
     public ResponseEntity<Void> deleteAllStats() {
