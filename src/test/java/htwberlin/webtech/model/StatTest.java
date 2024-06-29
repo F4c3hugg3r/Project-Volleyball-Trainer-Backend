@@ -8,6 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @SpringBootTest
 public class StatTest {
 
+    //eigentlich keine Tests benötigt, da equals, hash und toString mit Lombok geregelt ist
     @Test
     void testStatToString() {
         final StatId statId = new StatId(1, 1);
