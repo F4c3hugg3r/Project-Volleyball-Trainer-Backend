@@ -5,6 +5,7 @@ import lombok.*;
 
 import java.io.Serializable;
 
+@EqualsAndHashCode
 @ToString
 @Entity
 @Getter
@@ -17,4 +18,5 @@ public class Stat implements Serializable {
      private StatId id;
 
      private Integer anzahl;
+
 }
