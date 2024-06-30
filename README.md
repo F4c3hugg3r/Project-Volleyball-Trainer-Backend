@@ -1,9 +1,10 @@
-# webtech
+# Volleyballtrainer-Backend
 
-## Projekt
+Dies ist das **Backend** für das Projekt des Moduls Webtechnologien von *Lennard Dubhorn* 
 
-Dies ist ein Projekt für das Modul Webtechnologien von Lennard Dubhorn
+Informationen zur **Funktionsweise** sind in der README des Frontend-Reposirotories zu finden.
 
-## Web App
+## Funktionsweise und Datenbankanbindung
 
-Die Anwendung beschreibt eine Quiz-Artige Möglichkeit das 5:1 Läufersystem beim Volleyball zu üben. Es werden passende fragen gestellt welche die zugehörige Position auf dem Spielfeld (in Zahlen, also 1-6) und den darauf folgenden Laufweg bzw. die resultierende Position abfragen. Diese kann man aus der Sicht einer bestimmten Rolle, z.B. Außenangreifer beantworten und auswerten lassen und somit sein Wissen testen und weiterentwickeln. Es werden alle Rotationen durchgangen, sodass das Läufersystem effektiv gelernt werden kann.
+Dieses Backend kommuniziert mit einer **Prostgres Datenbank**, welche auf Render erstelt wurde und verwaltet **Stats** die dadurch erstellt werden, dass ein User Fragen beantwortet. Die Stats werden nach Id und Rating (1-4) als zusammenhängender primärschlüssel gespeichert. Außerdem gibt es noch eine Anzahl, welche bei erneutem Beantworten der Frage und gleichen rating inkrementiert wird.
+
